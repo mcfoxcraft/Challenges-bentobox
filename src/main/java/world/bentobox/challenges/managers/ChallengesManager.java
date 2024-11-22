@@ -248,10 +248,10 @@ public class ChallengesManager
      * @return - true if imported
      */
     public boolean loadChallenge(@Nullable Challenge challenge,
-        World world,
-        boolean overwrite,
-        User user,
-        boolean silent)
+                                 World world,
+                                 boolean overwrite,
+                                 User user,
+                                 boolean silent)
     {
         // This may happen if database somehow failed to load challenge and return
         // null as input.
@@ -260,9 +260,9 @@ public class ChallengesManager
             if (!silent)
             {
                 Utils.sendMessage(user,
-                    world,
-                    Constants.ERRORS + "load-error",
-                    Constants.PARAMETER_VALUE, "NULL");
+                        world,
+                        Constants.ERRORS + "load-error",
+                        Constants.PARAMETER_VALUE, "NULL");
             }
 
             return false;
@@ -273,9 +273,9 @@ public class ChallengesManager
             if (!silent)
             {
                 Utils.sendMessage(user,
-                    world,
-                    Constants.ERRORS + "invalid-challenge",
-                    Constants.PARAMETER_CHALLENGE, challenge.getUniqueId());
+                        world,
+                        Constants.ERRORS + "invalid-challenge",
+                        Constants.PARAMETER_CHALLENGE, challenge.getUniqueId());
             }
 
             this.addon.logWarning("Data for challenge `" + challenge.getUniqueId() + "` is not valid. It could be NULL element in item-stack!");
@@ -291,9 +291,9 @@ public class ChallengesManager
                 if (!silent)
                 {
                     Utils.sendMessage(user,
-                        world,
-                        Constants.MESSAGES + "load-skipping",
-                        Constants.PARAMETER_VALUE, challenge.getFriendlyName());
+                            world,
+                            Constants.MESSAGES + "load-skipping",
+                            Constants.PARAMETER_VALUE, challenge.getFriendlyName());
                 }
 
                 return false;
@@ -303,9 +303,9 @@ public class ChallengesManager
                 if (!silent)
                 {
                     Utils.sendMessage(user,
-                        world,
-                        Constants.MESSAGES + "load-overwriting",
-                        Constants.PARAMETER_VALUE, challenge.getFriendlyName());
+                            world,
+                            Constants.MESSAGES + "load-overwriting",
+                            Constants.PARAMETER_VALUE, challenge.getFriendlyName());
                 }
             }
         }
@@ -314,9 +314,9 @@ public class ChallengesManager
             if (!silent)
             {
                 Utils.sendMessage(user,
-                    world,
-                    Constants.MESSAGES + "load-add",
-                    Constants.PARAMETER_VALUE, challenge.getFriendlyName());
+                        world,
+                        Constants.MESSAGES + "load-add",
+                        Constants.PARAMETER_VALUE, challenge.getFriendlyName());
             }
         }
 
@@ -347,10 +347,10 @@ public class ChallengesManager
      * @return boolean that indicate about load status.
      */
     public boolean loadLevel(@Nullable ChallengeLevel level,
-            World world,
-            boolean overwrite,
-            User user,
-            boolean silent)
+                             World world,
+                             boolean overwrite,
+                             User user,
+                             boolean silent)
     {
         // This may happen if database somehow failed to load challenge and return
         // null as input.
@@ -359,9 +359,9 @@ public class ChallengesManager
             if (!silent)
             {
                 Utils.sendMessage(user,
-                    world,
-                    Constants.ERRORS + "load-error",
-                    Constants.PARAMETER_VALUE, "NULL");
+                        world,
+                        Constants.ERRORS + "load-error",
+                        Constants.PARAMETER_VALUE, "NULL");
             }
 
             return false;
@@ -372,9 +372,9 @@ public class ChallengesManager
             if (!silent)
             {
                 Utils.sendMessage(user,
-                    world,
-                    Constants.ERRORS + "invalid-level",
-                    "[level]", level.getUniqueId());
+                        world,
+                        Constants.ERRORS + "invalid-level",
+                        "[level]", level.getUniqueId());
             }
 
             this.addon.logWarning("Data for level `" + level.getUniqueId() + "` is not valid. It could be NULL element in item-stack!");
@@ -386,9 +386,9 @@ public class ChallengesManager
             if (user != null)
             {
                 Utils.sendMessage(user,
-                    world,
-                    Constants.ERRORS + "load-error",
-                    Constants.PARAMETER_VALUE, level.getFriendlyName());
+                        world,
+                        Constants.ERRORS + "load-error",
+                        Constants.PARAMETER_VALUE, level.getFriendlyName());
             }
             else
             {
@@ -405,9 +405,9 @@ public class ChallengesManager
                 if (!silent)
                 {
                     Utils.sendMessage(user,
-                        world,
-                        Constants.MESSAGES + "load-skipping",
-                        Constants.PARAMETER_VALUE, level.getFriendlyName());
+                            world,
+                            Constants.MESSAGES + "load-skipping",
+                            Constants.PARAMETER_VALUE, level.getFriendlyName());
                 }
 
                 return false;
@@ -417,9 +417,9 @@ public class ChallengesManager
                 if (!silent)
                 {
                     Utils.sendMessage(user,
-                        world,
-                        Constants.MESSAGES + "load-overwriting",
-                        Constants.PARAMETER_VALUE, level.getFriendlyName());
+                            world,
+                            Constants.MESSAGES + "load-overwriting",
+                            Constants.PARAMETER_VALUE, level.getFriendlyName());
                 }
             }
         }
@@ -428,9 +428,9 @@ public class ChallengesManager
             if (!silent)
             {
                 Utils.sendMessage(user,
-                    world,
-                    Constants.MESSAGES + "load-add",
-                    Constants.PARAMETER_VALUE, level.getFriendlyName());
+                        world,
+                        Constants.MESSAGES + "load-add",
+                        Constants.PARAMETER_VALUE, level.getFriendlyName());
             }
         }
 
@@ -516,7 +516,7 @@ public class ChallengesManager
             if (!this.challengeCacheData.containsKey(uniqueID))
             {
                 if (!this.challengeDatabase.objectExists(uniqueID) ||
-                    !this.loadChallenge(this.challengeDatabase.loadObject(uniqueID), Bukkit.getWorld(level.getWorld()), false, null, true))
+                        !this.loadChallenge(this.challengeDatabase.loadObject(uniqueID), Bukkit.getWorld(level.getWorld()), false, null, true))
                 {
                     this.addon.logError("Cannot find " + uniqueID + " challenge for " + level.getUniqueId());
                     return false;
@@ -609,12 +609,12 @@ public class ChallengesManager
         List<ChallengeLevel> levelList = this.levelDatabase.loadObjects();
 
         levelList.stream().
-            filter(level -> level.getUniqueId().startsWith(gamemode.toLowerCase()) ||
-                level.getUniqueId().startsWith(gamemode)).
-            forEach(level -> {
-                this.levelDatabase.deleteID(level.getUniqueId());
-                this.levelCacheData.remove(level.getUniqueId());
-            });
+                filter(level -> level.getUniqueId().startsWith(gamemode.toLowerCase()) ||
+                        level.getUniqueId().startsWith(gamemode)).
+                forEach(level -> {
+                    this.levelDatabase.deleteID(level.getUniqueId());
+                    this.levelCacheData.remove(level.getUniqueId());
+                });
     }
 
 
@@ -627,12 +627,12 @@ public class ChallengesManager
         List<Challenge> challengeList = this.challengeDatabase.loadObjects();
 
         challengeList.stream().
-            filter(challenge -> challenge.getUniqueId().startsWith(gamemode.toLowerCase()) ||
-                challenge.getUniqueId().startsWith(gamemode)).
-            forEach(challenge -> {
-                this.challengeDatabase.deleteID(challenge.getUniqueId());
-                this.challengeCacheData.remove(challenge.getUniqueId());
-            });
+                filter(challenge -> challenge.getUniqueId().startsWith(gamemode.toLowerCase()) ||
+                        challenge.getUniqueId().startsWith(gamemode)).
+                forEach(challenge -> {
+                    this.challengeDatabase.deleteID(challenge.getUniqueId());
+                    this.challengeCacheData.remove(challenge.getUniqueId());
+                });
     }
 
 
@@ -667,12 +667,12 @@ public class ChallengesManager
             this.addon.logError("No such world!");
             return;
         }
-        
+
         if (user.isPlayer())
         {
             Utils.sendMessage(user,
-                world,
-                Constants.MESSAGES + "migrate-start");
+                    world,
+                    Constants.MESSAGES + "migrate-start");
         }
         else
         {
@@ -689,8 +689,8 @@ public class ChallengesManager
             if (user.isPlayer())
             {
                 Utils.sendMessage(user,
-                    world,
-                    Constants.MESSAGES + "migrate-end");
+                        world,
+                        Constants.MESSAGES + "migrate-end");
             }
             else
             {
@@ -702,8 +702,8 @@ public class ChallengesManager
             if (user.isPlayer())
             {
                 Utils.sendMessage(user,
-                    world,
-                    Constants.MESSAGES + "migrate-not");
+                        world,
+                        Constants.MESSAGES + "migrate-not");
             }
             else
             {
@@ -741,7 +741,7 @@ public class ChallengesManager
                 level.getChallenges().clear();
 
                 challengesID.forEach(challenge ->
-                level.getChallenges().add(addonName + challenge.substring(world.getName().length())));
+                        level.getChallenges().add(addonName + challenge.substring(world.getName().length())));
 
                 this.levelDatabase.saveObjectAsync(level);
                 this.levelCacheData.put(level.getUniqueId(), level);
@@ -1131,19 +1131,19 @@ public class ChallengesManager
             // remove waiver amount to get count of challenges that still necessary to do.
 
             List<Challenge> previousChallengeList = previousLevel == null ?
-                Collections.emptyList() :
-                this.getLevelChallenges(previousLevel);
+                    Collections.emptyList() :
+                    this.getLevelChallenges(previousLevel);
 
             int challengesToDo = previousLevel == null ? 0 :
-                (previousChallengeList.size() - doneChallengeCount - previousLevel.getWaiverAmount());
+                    (previousChallengeList.size() - doneChallengeCount - previousLevel.getWaiverAmount());
 
             List<Challenge> challengeList = this.getLevelChallenges(level);
 
             // As level already contains unique ids of challenges, just iterate through them.
             doneChallengeCount = (int) challengeList.stream().
-                map(Challenge::getUniqueId).
-                filter(playerData::isChallengeDone).
-                count();
+                    map(Challenge::getUniqueId).
+                    filter(playerData::isChallengeDone).
+                    count();
 
             // Mark if level is unlocked
             boolean unlocked = previousUnlocked && challengesToDo <= 0;
@@ -1152,7 +1152,7 @@ public class ChallengesManager
                     level,
                     previousLevel,
                     challengesToDo,
-                challengeList.size() == doneChallengeCount,
+                    challengeList.size() == doneChallengeCount,
                     unlocked));
 
             previousLevel = level;
@@ -1189,26 +1189,26 @@ public class ChallengesManager
             ChallengeLevel previousLevel = levelIndex < 1 ? null : challengeLevelList.get(levelIndex - 1);
 
             List<Challenge> previousChallengeList = previousLevel == null ? Collections.emptyList() :
-                this.getLevelChallenges(previousLevel);
+                    this.getLevelChallenges(previousLevel);
 
             int challengesToDo = previousLevel == null ? 0 :
-                (previousChallengeList.size() - previousLevel.getWaiverAmount()) -
-                (int) previousChallengeList.stream().map(Challenge::getUniqueId).
-                    filter(playerData::isChallengeDone).count();
+                    (previousChallengeList.size() - previousLevel.getWaiverAmount()) -
+                            (int) previousChallengeList.stream().map(Challenge::getUniqueId).
+                                    filter(playerData::isChallengeDone).count();
 
             List<Challenge> challengeList = this.getLevelChallenges(level);
 
             // As level already contains unique ids of challenges, just iterate through them.
             int doneChallengeCount = (int) challengeList.stream().
-                map(Challenge::getUniqueId).
-                filter(playerData::isChallengeDone).
-                count();
+                    map(Challenge::getUniqueId).
+                    filter(playerData::isChallengeDone).
+                    count();
 
             return new LevelStatus(
                     level,
                     previousLevel,
                     challengesToDo,
-                challengeList.size() == doneChallengeCount,
+                    challengeList.size() == doneChallengeCount,
                     challengesToDo <= 0);
         }
     }
@@ -1240,9 +1240,9 @@ public class ChallengesManager
         List<Challenge> challengeList = this.getLevelChallenges(level);
 
         long doneChallengeCount = challengeList.stream().
-            map(Challenge::getUniqueId).
-            filter(playerData::isChallengeDone).
-            count();
+                map(Challenge::getUniqueId).
+                filter(playerData::isChallengeDone).
+                count();
 
         return challengeList.size() == doneChallengeCount;
     }
@@ -1307,9 +1307,9 @@ public class ChallengesManager
             }
 
             return island.getMemberSet().stream().map(Bukkit::getPlayer).
-                filter(Objects::nonNull).
-                mapToInt(player -> player.getStatistic(statistic)).
-                sum();
+                    filter(Objects::nonNull).
+                    mapToInt(player -> player.getStatistic(statistic)).
+                    sum();
         }
         else
         {
@@ -1339,9 +1339,9 @@ public class ChallengesManager
             }
 
             return island.getMemberSet().stream().map(Bukkit::getPlayer).
-                filter(Objects::nonNull).
-                mapToInt(player -> player.getStatistic(statistic, material)).
-                sum();
+                    filter(Objects::nonNull).
+                    mapToInt(player -> player.getStatistic(statistic, material)).
+                    sum();
         }
         else
         {
@@ -1371,9 +1371,9 @@ public class ChallengesManager
             }
 
             return island.getMemberSet().stream().map(Bukkit::getPlayer).
-                filter(Objects::nonNull).
-                mapToInt(player -> player.getStatistic(statistic, entity)).
-                sum();
+                    filter(Objects::nonNull).
+                    mapToInt(player -> player.getStatistic(statistic, entity)).
+                    sum();
         }
         else
         {
@@ -1438,7 +1438,7 @@ public class ChallengesManager
         }
 
         return System.currentTimeMillis() <
-            this.getLastCompletionDate(user, world, challenge) + challenge.getTimeout();
+                this.getLastCompletionDate(user, world, challenge) + challenge.getTimeout();
     }
 
 
@@ -1481,7 +1481,7 @@ public class ChallengesManager
     {
         String storageID = this.getDataUniqueID(userID, Util.getWorld(world));
         this.setChallengeComplete(storageID, challenge.getUniqueId(), completionCount);
-        this.addLogEntry(storageID, new LogEntry.Builder("COMPLETE").
+        this.addLogEntry(storageID, new LogEntry.Builder(LogEntry.LogType.ADD).
                 data(USER_ID, userID.toString()).
                 data(CHALLENGE_ID, challenge.getUniqueId()).
                 data("completion-count", Integer.toString(completionCount)).
@@ -1508,7 +1508,7 @@ public class ChallengesManager
         String storageID = this.getDataUniqueID(userID, Util.getWorld(world));
 
         this.setChallengeComplete(storageID, challenge.getUniqueId());
-        this.addLogEntry(storageID, new LogEntry.Builder("COMPLETE").
+        this.addLogEntry(storageID, new LogEntry.Builder(LogEntry.LogType.ADD).
                 data(USER_ID, userID.toString()).
                 data(CHALLENGE_ID, challenge.getUniqueId()).
                 data(ADMIN_ID, adminID == null ? "OP" : adminID.toString()).
@@ -1534,7 +1534,7 @@ public class ChallengesManager
         String storageID = this.getDataUniqueID(userID, Util.getWorld(world));
 
         this.resetChallenge(storageID, challenge.getUniqueId());
-        this.addLogEntry(storageID, new LogEntry.Builder(RESET).
+        this.addLogEntry(storageID, new LogEntry.Builder(LogEntry.LogType.REMOVE).
                 data(USER_ID, userID.toString()).
                 data(CHALLENGE_ID, challenge.getUniqueId()).
                 data(ADMIN_ID, adminID == null ? RESET : adminID.toString()).
@@ -1572,7 +1572,7 @@ public class ChallengesManager
 
         this.islandWorldManager.getAddon(world).ifPresent(gameMode -> {
             this.resetAllChallenges(storageID, gameMode.getDescription().getName());
-            this.addLogEntry(storageID, new LogEntry.Builder("RESET_ALL").
+            this.addLogEntry(storageID, new LogEntry.Builder(LogEntry.LogType.REMOVE).
                     data(USER_ID, userID.toString()).
                     data(ADMIN_ID, adminID == null ? "ISLAND_RESET" : adminID.toString()).
                     build());
@@ -1642,9 +1642,9 @@ public class ChallengesManager
         this.addPlayerData(storageDataID);
 
         return this.islandWorldManager.getAddon(world).filter(gameMode -> this.getAllChallengeLevelStatus(storageDataID, gameMode.getDescription().getName()).
-                stream().
-                filter(LevelStatus::isUnlocked).
-                anyMatch(lv -> lv.getLevel().equals(level))).
+                        stream().
+                        filter(LevelStatus::isUnlocked).
+                        anyMatch(lv -> lv.getLevel().equals(level))).
                 isPresent();
 
     }
@@ -1661,7 +1661,7 @@ public class ChallengesManager
         String storageID = this.getDataUniqueID(user, Util.getWorld(world));
 
         this.setLevelComplete(storageID, level.getUniqueId());
-        this.addLogEntry(storageID, new LogEntry.Builder("COMPLETE_LEVEL").
+        this.addLogEntry(storageID, new LogEntry.Builder(LogEntry.LogType.ADD).
                 data(USER_ID, user.getUniqueId().toString()).
                 data("level", level.getUniqueId()).build());
 
@@ -1711,9 +1711,9 @@ public class ChallengesManager
     public List<LevelStatus> getAllChallengeLevelStatus(User user, World world)
     {
         return this.islandWorldManager.getAddon(world).map(gameMode ->
-            this.getAllChallengeLevelStatus(
-                this.getDataUniqueID(user, Util.getWorld(world)),
-                gameMode.getDescription().getName())).
+                        this.getAllChallengeLevelStatus(
+                                this.getDataUniqueID(user, Util.getWorld(world)),
+                                gameMode.getDescription().getName())).
                 orElse(Collections.emptyList());
     }
 
@@ -1730,7 +1730,7 @@ public class ChallengesManager
         LevelStatus lastStatus = null;
 
         for (Iterator<LevelStatus> statusIterator = this.getAllChallengeLevelStatus(user, world).iterator();
-            statusIterator.hasNext() && (lastStatus == null || lastStatus.isUnlocked());)
+             statusIterator.hasNext() && (lastStatus == null || lastStatus.isUnlocked());)
         {
             lastStatus = statusIterator.next();
         }
@@ -1768,12 +1768,12 @@ public class ChallengesManager
     public List<String> getAllChallengesNames(@NonNull World world)
     {
         return this.islandWorldManager.getAddon(world).map(gameMode ->
-            this.challengeCacheData.values().stream().
-                filter(challenge -> challenge.matchGameMode(gameMode.getDescription().getName())).
-                sorted(this.challengeComparator).
-                map(Challenge::getUniqueId).
-                collect(Collectors.toList())).
-            orElse(Collections.emptyList());
+                        this.challengeCacheData.values().stream().
+                                filter(challenge -> challenge.matchGameMode(gameMode.getDescription().getName())).
+                                sorted(this.challengeComparator).
+                                map(Challenge::getUniqueId).
+                                collect(Collectors.toList())).
+                orElse(Collections.emptyList());
     }
 
 
@@ -1786,11 +1786,11 @@ public class ChallengesManager
     public List<Challenge> getAllChallenges(@NonNull World world)
     {
         return this.islandWorldManager.getAddon(world).map(gameMode ->
-            this.challengeCacheData.values().stream().
-                filter(challenge -> challenge.matchGameMode(gameMode.getDescription().getName())).
-                sorted(this.challengeComparator).
-                collect(Collectors.toList())).
-            orElse(Collections.emptyList());
+                        this.challengeCacheData.values().stream().
+                                filter(challenge -> challenge.matchGameMode(gameMode.getDescription().getName())).
+                                sorted(this.challengeComparator).
+                                collect(Collectors.toList())).
+                orElse(Collections.emptyList());
     }
 
 
@@ -1803,11 +1803,11 @@ public class ChallengesManager
     {
         // Free Challenges hides under FREE level.
         return this.islandWorldManager.getAddon(world).map(gameMode ->
-            this.challengeCacheData.values().stream().
-                filter(challenge -> challenge.getLevel().equals(FREE) &&
-                    challenge.matchGameMode(gameMode.getDescription().getName())).
-                sorted(Comparator.comparing(Challenge::getOrder)).
-                collect(Collectors.toList())).
+                        this.challengeCacheData.values().stream().
+                                filter(challenge -> challenge.getLevel().equals(FREE) &&
+                                        challenge.matchGameMode(gameMode.getDescription().getName())).
+                                sorted(Comparator.comparing(Challenge::getOrder)).
+                                collect(Collectors.toList())).
                 orElse(Collections.emptyList());
     }
 
@@ -1820,7 +1820,7 @@ public class ChallengesManager
     public List<Challenge> getLevelChallenges(ChallengeLevel level)
     {
         return this.getLevelChallenges(level,
-            this.addon.getChallengesSettings().isIncludeUndeployed());
+                this.addon.getChallengesSettings().isIncludeUndeployed());
     }
 
 
@@ -1955,8 +1955,8 @@ public class ChallengesManager
     public int getChallengeCount(World world)
     {
         return (int) this.getAllChallenges(world).stream().
-            filter(challenge -> this.settings.isIncludeUndeployed() || challenge.isDeployed()).
-            count();
+                filter(challenge -> this.settings.isIncludeUndeployed() || challenge.isDeployed()).
+                count();
     }
 
 
@@ -1969,8 +1969,8 @@ public class ChallengesManager
     public long getCompletedChallengeCount(User user, World world)
     {
         return this.getAllChallenges(world).stream().
-            filter(challenge -> this.getChallengeTimes(user, world, challenge) > 0).
-            count();
+                filter(challenge -> this.getChallengeTimes(user, world, challenge) > 0).
+                count();
     }
 
 
@@ -1983,8 +1983,8 @@ public class ChallengesManager
     public long getTotalChallengeCompletionCount(User user, World world)
     {
         return this.getAllChallenges(world).stream().
-            mapToLong(challenge -> this.getChallengeTimes(user, world, challenge)).
-            sum();
+                mapToLong(challenge -> this.getChallengeTimes(user, world, challenge)).
+                sum();
     }
 
 
@@ -1998,8 +1998,8 @@ public class ChallengesManager
     public long getLevelCompletedChallengeCount(User user, World world, ChallengeLevel level)
     {
         return this.getLevelChallenges(level).stream().
-            filter(challenge -> this.getChallengeTimes(user, world, challenge) > 0).
-            count();
+                filter(challenge -> this.getChallengeTimes(user, world, challenge) > 0).
+                count();
     }
 
 
@@ -2016,8 +2016,8 @@ public class ChallengesManager
     public List<ChallengeLevel> getLevels(@NonNull World world)
     {
         return this.islandWorldManager.getAddon(world).map(gameMode ->
-            this.getLevels(gameMode.getDescription().getName())).
-            orElse(Collections.emptyList());
+                        this.getLevels(gameMode.getDescription().getName())).
+                orElse(Collections.emptyList());
     }
 
 
@@ -2030,9 +2030,9 @@ public class ChallengesManager
     {
         // TODO: Probably need to check also database.
         return this.levelCacheData.values().stream().
-            sorted(ChallengeLevel::compareTo).
-            filter(level -> level.matchGameMode(gameMode)).
-            collect(Collectors.toList());
+                sorted(ChallengeLevel::compareTo).
+                filter(level -> level.matchGameMode(gameMode)).
+                collect(Collectors.toList());
     }
 
 
@@ -2044,12 +2044,12 @@ public class ChallengesManager
     public List<String> getLevelNames(@NonNull World world)
     {
         return this.islandWorldManager.getAddon(world).map(gameMode ->
-            this.levelCacheData.values().stream().
-                sorted(ChallengeLevel::compareTo).
-                filter(level -> level.matchGameMode(gameMode.getDescription().getName())).
-                map(ChallengeLevel::getUniqueId).
-                collect(Collectors.toList())).
-            orElse(Collections.emptyList());
+                        this.levelCacheData.values().stream().
+                                sorted(ChallengeLevel::compareTo).
+                                filter(level -> level.matchGameMode(gameMode.getDescription().getName())).
+                                map(ChallengeLevel::getUniqueId).
+                                collect(Collectors.toList())).
+                orElse(Collections.emptyList());
     }
 
 
@@ -2247,7 +2247,7 @@ public class ChallengesManager
             this.levelDatabase.deleteObject(challengeLevel);
 
             this.addon.getPlugin().getPlaceholdersManager().
-            unregisterPlaceholder("challenges_completed_challenge_count_per_level_" + challengeLevel.getUniqueId());
+                    unregisterPlaceholder("challenges_completed_challenge_count_per_level_" + challengeLevel.getUniqueId());
         }
     }
 
@@ -2260,7 +2260,7 @@ public class ChallengesManager
     public boolean hasAnyChallengeData(@NonNull World world)
     {
         return this.islandWorldManager.getAddon(world).filter(gameMode ->
-            this.hasAnyChallengeData(gameMode.getDescription().getName())).isPresent();
+                this.hasAnyChallengeData(gameMode.getDescription().getName())).isPresent();
     }
 
 
@@ -2272,9 +2272,9 @@ public class ChallengesManager
     public boolean hasAnyChallengeData(@NonNull String gameMode)
     {
         return this.challengeCacheData.values().stream().anyMatch(challenge -> challenge.matchGameMode(gameMode)) ||
-            this.levelCacheData.values().stream().anyMatch(level -> level.matchGameMode(gameMode)) ||
-            this.challengeDatabase.loadObjects().stream().anyMatch(challenge -> challenge.matchGameMode(gameMode)) ||
-            this.levelDatabase.loadObjects().stream().anyMatch(level -> level.matchGameMode(gameMode));
+                this.levelCacheData.values().stream().anyMatch(level -> level.matchGameMode(gameMode)) ||
+                this.challengeDatabase.loadObjects().stream().anyMatch(challenge -> challenge.matchGameMode(gameMode)) ||
+                this.levelDatabase.loadObjects().stream().anyMatch(level -> level.matchGameMode(gameMode));
     }
 
 
@@ -2298,8 +2298,8 @@ public class ChallengesManager
     public long getCompletedLevelCount(User user, World world)
     {
         return this.getAllChallengeLevelStatus(user, world).stream().
-            filter(LevelStatus::isComplete).
-            count();
+                filter(LevelStatus::isComplete).
+                count();
     }
 
 
@@ -2312,7 +2312,7 @@ public class ChallengesManager
     public long getUnlockedLevelCount(User user, World world)
     {
         return this.getAllChallengeLevelStatus(user, world).stream().
-            filter(LevelStatus::isUnlocked).
-            count();
+                filter(LevelStatus::isUnlocked).
+                count();
     }
 }
